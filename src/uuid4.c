@@ -6,12 +6,6 @@
 
 #define UUID_NUM_OF_BYTES   16
 
-typedef union
-{
-    unsigned char b[UUID_NUM_OF_BYTES];
-    uint64_t word[2];
-} seed_t;
-
 static uint64_t xorshift128plus(uint8_t *seedBuffer)
 {
     uint64_t *s = (uint64_t *)seedBuffer;
@@ -54,7 +48,7 @@ void Uuid4_Generate(CDate *date, uint8_t *serialNumber, uint8_t *uuidBin)
     memcpy(uuidBin, s.b, sizeof(s));
 }
 
-void Uuid4_BinToString(uint8_t *uuidBin, uint8_t *uuidString)
+void Uuid4_BinToString(const uint8_t *uuidBin, uint8_t *uuidString)
 {
     assert(uuidBin != NULL);
     assert(uuidString != NULL);
